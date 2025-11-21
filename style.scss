@@ -8,26 +8,62 @@ html,
 body {
   height: 100%;
   width: 100%;
-  color: white;
-  overflow-y: hidden;
+  overflow: hidden;
 }
+
 main {
-  position: relative;
   width: 100%;
   height: 100%;
-  background-color: black;
+  background: black;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  position: relative;
+}
 
-  div#box {
-    position: absolute;
-    background-color: aqua;
-    height: 100px;
-    width: 100px;
-    border-radius: 100%;
-    transform: translate(-50%, -50%);
-    transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
-  }
+/* Circle (mask controller) */
+#box {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  // background-color: aqua;
+  background-color: transparent;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Top image */
+#image1 {
+  width: 500px;
+  height: 700px;
+  background-image: url("https://wallpapers.com/images/hd/robert-downey-jr-iron-man-phone-s91o7fh9899qlrpp.jpg");
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  z-index: 2;
+  border-radius: 20px;
+
+  --mask: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    transparent 0 15%,
+    black 16%
+  );
+  -webkit-mask-image: var(--mask);
+  mask-image: var(--mask);
+  mask-repeat: no-repeat;
+}
+
+/* Bottom image */
+#image2 {
+  width: 500px;
+  height: 700px;
+  background-image: url("https://i.guim.co.uk/img/media/f76e2c99e1d0683752be0bc8708f37a09cb4c124/0_205_3072_1843/master/3072.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=ed43e7e895c6008bf35ecfef497e7654");
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  z-index: 1;
+  border-radius: 20px;
 }
